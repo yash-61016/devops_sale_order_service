@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "HYAZV9pzH7FppJf4ZDWL7A0b0e3uLYbrslPUrtsImNs=",
+  "Source": "devops_sale_order_service",
+  "BasePath": "_content/devops_sale_order_service",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

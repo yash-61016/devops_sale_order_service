@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/devops_sale_order_service.props" />
+</Project>
