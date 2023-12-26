@@ -26,12 +26,15 @@ namespace devops_sale_order_service.Repository
 
         public async Task CreateSaleOrder(SaleOrder saleOrder)
         {
+            saleOrder.CreatedDate = DateTimeOffset.Now;
+            saleOrder.UpdatedDate = DateTimeOffset.Now;
             await _db.SaleOrders.AddAsync(saleOrder);
             await SaveAsync();
         }
 
         public async Task UpdateSaleOrder(SaleOrder saleOrder)
         {
+            saleOrder.UpdatedDate = DateTimeOffset.Now;
             _db.SaleOrders.Update(saleOrder);
             await SaveAsync();
         }
