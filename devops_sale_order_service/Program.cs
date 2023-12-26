@@ -1,6 +1,9 @@
 using AutoMapper;
 using devops_sale_order_service;
 using devops_sale_order_service.Data;
+using devops_sale_order_service.Endpoints;
+using devops_sale_order_service.Repository;
+using devops_sale_order_service.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<ISaleOrderRepository, SaleOrderRepository>();
+builder.Services.AddScoped<ISaleOrderLineRepository, SaleOrderLineRepository>();
 
 var connectionString = builder.Configuration.GetConnectionString("SaleOrderDbConnectionString");
 
@@ -31,7 +37,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 ApplyMigration();
-
+app.ConfigureSaleOrderEndpoints();
 app.Run();
 
 void ApplyMigration()

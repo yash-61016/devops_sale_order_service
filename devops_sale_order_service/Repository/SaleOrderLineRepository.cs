@@ -16,6 +16,8 @@ namespace devops_sale_order_service.Repository
 
         public async Task CreateSaleOrderLine(SaleOrderLine saleOrderLine)
         {
+            saleOrderLine.CreatedDate = DateTimeOffset.Now;
+            saleOrderLine.UpdatedDate = DateTimeOffset.Now;
             await _db.SaleOrderLines.AddAsync(saleOrderLine);
             await SaveAsync();
         }
@@ -27,6 +29,7 @@ namespace devops_sale_order_service.Repository
 
         public async Task UpdateSaleOrderLine(SaleOrderLine saleOrderLine)
         {
+            saleOrderLine.UpdatedDate = DateTimeOffset.Now;
             _db.SaleOrderLines.Update(saleOrderLine);
             await SaveAsync();
         }
