@@ -2,8 +2,11 @@ using AutoMapper;
 using devops_sale_order_service;
 using devops_sale_order_service.Data;
 using devops_sale_order_service.Endpoints;
+using devops_sale_order_service.Filters;
+using devops_sale_order_service.Models.Dto.Create;
 using devops_sale_order_service.Repository;
 using devops_sale_order_service.Repository.IRepository;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +27,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
+// add dependency injection for validators for the sale order endpoints
+builder.Services.AddScoped<IValidator<SaleOrderCreateDto>, CreateSaleOrderValidator<SaleOrderCreateDto>>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
