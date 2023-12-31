@@ -6,6 +6,8 @@ using devops_sale_order_service.Filters;
 using devops_sale_order_service.Models.Dto.Create;
 using devops_sale_order_service.Repository;
 using devops_sale_order_service.Repository.IRepository;
+using devops_sale_order_service.Service;
+using devops_sale_order_service.Service.IService;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +17,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddScoped<ISaleOrderService, SaleOrderServiceFake>();
+}
+else
+{
+    builder.Services.AddScoped<ISaleOrderService, SaleOrderService>();
+}
 
 builder.Services.AddScoped<ISaleOrderRepository, SaleOrderRepository>();
 builder.Services.AddScoped<ISaleOrderLineRepository, SaleOrderLineRepository>();
